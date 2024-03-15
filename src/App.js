@@ -3,11 +3,23 @@ import "./App.css";
 import { useState } from "react";
 import NewProject from "./components/NewProject";
 import NoProjectSelected from "./components/NoProjectSelected";
+import SelectedProject from "./components/SelectedProject";
 function App() {
   const [project_display_State, set_project_display_State] = useState({
     project_display_StateShowId: undefined,
     projects: [],
   });
+
+  //cancel button handler function name(params) {
+
+  function cancelButtonHandler() {
+    set_project_display_State((prevState) => {
+      return {
+        ...prevState,
+        project_display_StateShowId: undefined,
+      };
+    });
+  }
 
   function changeProject() {
     set_project_display_State((prevState) => {
@@ -17,6 +29,24 @@ function App() {
       };
     });
   }
+
+  //============================side bar project handler =====================>
+  function sideBarProjectHandler(id) {
+    set_project_display_State((prevState) => {
+      return {
+        ...prevState,
+        project_display_StateShowId: id,
+      };
+    });
+    let selectedProject = project_display_State.projects.find(
+      (val) => val.id === id
+    );
+
+   
+     
+   
+  }
+
   //here we handle all userData to display his save project and other
   function NewProjectData(userData) {
     let newProject = {
@@ -31,19 +61,33 @@ function App() {
       };
     });
   }
-  console.log(project_display_State);
+ 
 
   let content;
 
   if (project_display_State.project_display_StateShowId === undefined) {
     content = <NoProjectSelected changeProjectHandler={changeProject} />;
   } else if (project_display_State.project_display_StateShowId === null) {
-    content = <NewProject Add={NewProjectData} />;
+    content = <NewProject Add={NewProjectData} cancel={cancelButtonHandler} />;
+  }
+  else
+  {
+    let selectedProject = project_display_State.projects.find(
+      (val) => val.id === project_display_State.project_display_StateShowId
+    );
+
+    
+     content= <SelectedProject Data={selectedProject}/>
+
   }
 
   return (
     <main className="h-screen my-8 flex gap-8">
-      <ProjectSideBar changeProjectHandler={changeProject} addProject={project_display_State.projects}  />
+      <ProjectSideBar
+        changeProjectHandler={changeProject}
+        addProject={project_display_State.projects}
+        sideBarProject={sideBarProjectHandler}
+      />
       {content}
     </main>
   );
