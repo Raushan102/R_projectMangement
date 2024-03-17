@@ -1,8 +1,19 @@
 import React from "react";
 import Button from "./Button";
 
-function ProjectSideBar({ changeProjectHandler, addProject, sideBarProject,addCss }) {
-  let  buttonCss='first-letter:uppercase text-left rounded-md text-stone-400 hover:text-stone-200 hover:bg-stone-600 py-1 px-1  w-full';
+function ProjectSideBar({ changeProjectHandler, addProject, sideBarProject,SelectedId }) {
+
+   
+ console.log("selected project is ",SelectedId);
+
+ 
+   let  selectedCss='first-letter:uppercase text-left rounded-md text-stone-200 bg-stone-600 py-1 px-1  w-full';
+
+  
+      let buttonCss='first-letter:uppercase text-left rounded-md text-stone-400 hover:text-stone-200 hover:bg-stone-600 py-1 px-1  w-full';
+
+  
+
 
  
 
@@ -19,7 +30,7 @@ function ProjectSideBar({ changeProjectHandler, addProject, sideBarProject,addCs
         {addProject.map((value) => (
           <li key={value.id} className="my-2 text-left w-full">
             <button
-              className={buttonCss}
+              className={value.id===SelectedId ? selectedCss : buttonCss}
               onClick={() => sideBarProject(value.id)}
               
             >

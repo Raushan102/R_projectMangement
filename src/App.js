@@ -8,7 +8,39 @@ function App() {
   const [project_display_State, set_project_display_State] = useState({
     project_display_StateShowId: undefined,
     projects: [],
+    Tasks: [],
   });
+
+  //=========================<Task>==================================>
+  //=================onAddTask=======================================>
+
+  function AddTaskHandler(text) {
+    set_project_display_State((prevState) => {
+
+      let taskID=Math.random()
+      let newTask = {
+        Text: text,
+        id:taskID,
+        projectId: prevState.project_display_StateShowId,
+      };
+      return {
+        ...prevState,
+        Tasks: [...prevState.Tasks, newTask],
+      };
+    });
+  }
+  //===================onDeleteTask==================================>
+
+  function onDeleteTask(id) {
+    set_project_display_State((preState) => {
+      return {
+        ...preState,
+        Tasks: preState.Tasks.filter((val) => val.id !== id),
+      };
+    });
+  }
+
+  //========================<Task/>=======================================>
 
   //cancel button handler function name(params) {
 
@@ -38,15 +70,9 @@ function App() {
         project_display_StateShowId: id,
       };
     });
-    let selectedProject = project_display_State.projects.find(
-      (val) => val.id === id
-    );
-
-   
-     
    
   }
-
+  //==================================new project handler =========================>
   //here we handle all userData to display his save project and other
   function NewProjectData(userData) {
     let newProject = {
@@ -61,25 +87,46 @@ function App() {
       };
     });
   }
- 
 
+  //==============================Delete project handler ===================>
+
+  function DeleteProjectHandler(Delete_project_id) {
+    set_project_display_State((prevState) => {
+      return {
+        ...prevState,
+        project_display_StateShowId: undefined,
+        projects: prevState.projects.filter(
+          (item) => item.id !== prevState.project_display_StateShowId
+        ),
+      };
+    });
+  }
+  //=========================display content according to event==================>
+ 
+ 
   let content;
 
   if (project_display_State.project_display_StateShowId === undefined) {
     content = <NoProjectSelected changeProjectHandler={changeProject} />;
   } else if (project_display_State.project_display_StateShowId === null) {
     content = <NewProject Add={NewProjectData} cancel={cancelButtonHandler} />;
-  }
-  else
-  {
+  } else {
     let selectedProject = project_display_State.projects.find(
       (val) => val.id === project_display_State.project_display_StateShowId
     );
 
-    
-     content= <SelectedProject Data={selectedProject}/>
 
+    content = (
+      <SelectedProject
+        Data={selectedProject}
+        DeleteProject={DeleteProjectHandler}
+        onAddTask={AddTaskHandler}
+        onDeleteTask={onDeleteTask}
+        task={project_display_State.Tasks}
+      />
+    );
   }
+  //==============================================================================>
 
   return (
     <main className="h-screen my-8 flex gap-8">
@@ -87,6 +134,7 @@ function App() {
         changeProjectHandler={changeProject}
         addProject={project_display_State.projects}
         sideBarProject={sideBarProjectHandler}
+        SelectedId={project_display_State.project_display_StateShowId}
       />
       {content}
     </main>
