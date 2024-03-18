@@ -19,7 +19,7 @@ function ProjectSideBar({ changeProjectHandler, addProject, sideBarProject,Selec
 
 
   return (
-    <aside className="w-1/3 px-8 py-16 bg-slate-900 text-stone-50 md:w-72 rounded-r-xl">
+    <aside className="w-1/3  px-1 py-2 sm:px-8 sm:py-16 bg-slate-900 text-stone-50 md:w-72 rounded-r-xl">
       <h2 className="mb-8 font-bold uppercase md:text-xl text-stone-200">
         your projects
       </h2>
