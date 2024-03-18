@@ -129,7 +129,7 @@ function App() {
   //==============================================================================>
 
   return (
-    <main className="h-screen my-8 flex gap-8">
+    <main className="h-screen my-8 flex gap-1 sm:gap-8">
       <ProjectSideBar
         changeProjectHandler={changeProject}
         addProject={project_display_State.projects}

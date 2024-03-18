@@ -4,7 +4,7 @@ import No_SelectedProjected_image from "../assets/no-projects.png";
 
 function NoProjectSelected({changeProjectHandler}) {
   return (
-    <div className="mt-24 text-center w-2/3">
+    <div className="mt-24 text-center w-2/3 ">
       <img
         src={No_SelectedProjected_image}
         alt="no_projected"

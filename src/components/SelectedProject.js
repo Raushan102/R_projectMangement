@@ -34,9 +34,9 @@ function SelectedProject({
           please make sure you provide a valid value for task name{" "}
         </p>
       </Model>
-      <div className="w-[40rem]  flex-col mx-1 my-5 ">
+      <div className="w-[40rem]  flex-col mx-2 my-5 ">
         <div className="flex items-center justify-between ">
-          <h1 className="text-stone-900 font-extrabold text-2xl">
+          <h1 className="text-stone-900 font-extrabold text-1xl">
             {Data.Title}
           </h1>
           <button

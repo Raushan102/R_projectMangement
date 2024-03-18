@@ -38,7 +38,7 @@ function NewProject({ Add,cancel }) {
         <p className="text-stone-600 my-1">Oops...looks like you forgot to enter a value.</p>
         <p className="text-stone-600 my-1">please make sure you provide a valid value for every input field </p>
       </Model>
-      <div className="w-[35rem] mt-16">
+      <div className="w-[35rem] mx-2 mt-16">
         <menu className="flex items-center justify-end gap-4 my-4">
           <li>
             <button className="text-stone-800 hover:text-stone-950" onClick={cancel}>
